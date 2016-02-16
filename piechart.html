@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+</style>
+<body>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var subjects = [];
+
+var country;
+
+var colors = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"].reverse();
+
+var width = 250,
+    height = 250,
+    radius = Math.min(width, height) / 2 - 24;
+
+var color = d3.scale.ordinal()
+    .range(colors);
+
+var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+var labelArc = d3.svg.arc()
+    .outerRadius(radius -10)
+    .innerRadius(radius - 40);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d[country]; });
+
+
+
+function createGraphs(filename){
+
+d3.csv(filename, type, function(error, data) {
+  if (error) throw error;
+
+
+  console.log(data);
+  for (var key in data[0]) {
+    subjects.push(key);
+  }
+  //subjects = ["question", "total", "Cyprus", "New Zealand", "Singapore", "Sweden"]
+
+
+  var title = d3.select("body").append("h1").text(subjects[subjects.length-1]);
+
+  for(var i = 2; i < subjects.length - 1; i++){
+
+
+  country = subjects[i];
+
+  var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+
+
+
+  var g = svg.selectAll(".arc")
+      .data(pie(data))
+    .enter().append("g")
+      .attr("class", "arc");
+
+  g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(d.data.question); });
+
+  
+  g.append("text")
+      .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .text(function(d) { return d.data[country] + "%"; });
+
+  g.on("click", function(object){detailedData(object)})
+  
+
+  svg.append("text")
+      .text(country)
+      .attr("font-family", "sans-serif")
+      .attr("font-size", "24px")
+      .attr("dy", -height/2 + 24)
+      .attr("dx", -(country.length*6));
+
+  }
+
+  var legend = d3.select("body").append("g");
+
+  data.forEach(function(d, i){
+    legend.append("div").style("color", colors[i]).text(d.question);
+
+  })
+
+  subjects = [];
+
+});
+
+
+}
+
+function type(d) {
+  d.Total = +d.Total;
+  return d;
+}
+
+function detailedData(obj){
+  var maybeBarchart = d3.select(".barchart");
+  if(!maybeBarchart.empty()){
+    maybeBarchart.remove();
+  }
+  var object = obj.data;
+
+  console.log(Object.keys(object));
+
+  var data = [["Cyprus", object["Cyprus"]], ["New Zealand", object["New Zealand"]], ["Singapore", object["Singapore"]], ["Sweden", object["Sweden"]]];
+
+  var W = 500, H = 200;
+
+  var widthScale = d3.scale.linear()
+                    .domain([0,50])
+                    .range([0,H]);
+
+
+  var canvas = d3.select("body")
+                .append("svg")
+                .attr("class", "barchart")
+                .attr("width", W)
+                .attr("height", H)
+                .style("stroke-width", 3)
+                .style("stroke", "black");
+
+  var bars = canvas.selectAll("rect")
+              .data(data)
+              .enter()
+                  .append("rect")
+                  .attr("height", function(d){return widthScale(d[1])}) 
+                  .attr("width", 50)
+                  .attr("fill", color(obj.data.question))
+                  .attr("x", function(d, i){return i * 60;})
+                  .attr("y", function(d){return H - widthScale(d[1])});
+
+}
+
+
+createGraphs("data/poldata.csv");
+//createGraphs("data/sexdata.csv");
+//createGraphs("data/obeydata.csv");
+//createGraphs("data/prouddata.csv");
+
+</script>
+</body>
+</html>

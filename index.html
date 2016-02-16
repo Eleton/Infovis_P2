@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<title>Aiman Josefsson, IVIS16</title>
+</head>
+<style>
+body{
+	margin: 15px;
+}
+img{
+	display: inline-block;
+}
+
+</style>
+<body>
+	<div class="row">
+		<div class="col-md-12">
+			<p>12th February, 2016</p>
+			<h2 class="title">DH2321 Project 2</h2>
+			<h1 class="title">Aiman Josefsson</h1>
+			<hr>
+		</div>
+		<div class="col-md-9">
+			<h1>Learning outcome/tl;dr-version/The part that which be less than 300 words</h1>
+			<p>I have looked at data about political interest of Sweden, Singapore, Cyprus and New Zealand. Unsatisfied with the representation on WVS, I made <a href="piechart.html">my own tool</a> which transforms the information to pie charts. The charts have an interactive feature where specific properties are compared in a seperate bar chart.</p>
+			<h1>Where should I move?</h1>
+			<h4>A study on the countries available in WVS database</h4>
+			<h3>The mission</h3>
+			<p>I'm conceptually thinking of briefly moving to another country when I graduate. I love Sweden, but you can't live with swedish winter your whole life.<br>Therefore I would like to evaluate a couple of different living alternatives based on how they compare to Sweden in a couple of values that I value myself! For this I will try the WVS (World Values Surveys) tool for analysing nations.</p>
+		</div>
+		<div class="col-md-12">
+			<h1>Analytical Trail of WVS</h1>
+			<div class="row">
+				<div class="col-md-4">
+					<img src="images/start.png" style="width:420px;height:235px;">
+					<p class="bg-info"><b>1. Select wave</b> <br> WVS wants me to choose "a wave". That is what they call a time period of between 4-5 years. New terminology is thrown at me from the start. I want the newest data, so I click on 2010-2014.</p>
+				</div>
+				<div class="col-md-3">
+					<img src="images/selectnation.png" style="width:340px;height:234px;">
+					<p class="bg-info"><b>2. Select nations</b> <br> Here I get a list of available countries. I would like to choose Malta, but it isn't on the list, so I compromise and selects Cyprus instead. Hopefully they are close. Singapore is also interesting, and I'm a little curious of New Zealand. And of course I want to compare it to Sweden.</p>
+				</div>
+				<div class="col-md-3">
+					<img src="images/question.png" style="width:340px;height:234px;">
+					<p class="bg-info"><b>3. Select question</b> <br> I would prefer to compare several values at once, but I can only do one at the time it seems.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<img src="images/table.png" style="width:340px;height:234px;">
+					<p class="bg-info"><b>4. Table of data</b> <br> A sexy table of data is presented to me. But I'm a modern human being who is easily bored by pure numbers. I want my information wrapped in graphics.</p>
+				</div>
+				<div class="col-md-3">
+					<img src="images/graph.png" style="width:340px;height:234px;">
+					<p class="bg-info"><b>5. A simple diagram</b> <br> When I look at this plot, I don't know what I'm looking at, and it stresses me. Too many colors. Too much gazing around and remembering colors. I hastens myself in finding a different view of the data.</p>
+				</div>
+				<div class="col-md-3">
+					<img src="images/piechart.png" style="width:340px;height:234px;">
+					<p class="bg-info"><b>6. Pie chart</b><br> The pie chart. Finally a familiar face! However, I can only look at one nation at a time, and a lot of space is wasted... I would want some kind of tool that shows several nations simultaneously.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<a href="piechart.html"><h1>Solution</h1>Here is my improved plotting tool!</a>
+			<h1>Analytical Trail of own tool</h1>
+			<div class="row">
+				<div class="col-md-4">
+					<img src="images/own1.png" style="width:420px;height:235px;">
+					<p class="bg-info"><b>1. First the overview</b> <br> My most wanted feature was to be able to evaluate several countries at the same time, so, voila!</p>
+				</div>
+				<div class="col-md-3">
+					<img src="images/own2.png" style="width:340px;height:234px;">
+					<p class="bg-info"><b>2. Details on demand</b> <br> I went with pie charts because they resonated well with the given data. However a con of piecharts is that it is difficult to compare different slices of different units. Therefore I added the details-on-demand-feature with a bar chart below.</p>
+				</div>
+				<div class="col-md-3">
+					<img src="images/own3.png" style="width:340px;height:234px;">
+					<p class="bg-info"><b>3. Interactivity</b> <br> Of course you can switch between different answers to compare. Enjoy!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
