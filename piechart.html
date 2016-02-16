@@ -124,9 +124,14 @@ function detailedData(obj){
   }
   var object = obj.data;
 
-  console.log(Object.keys(object));
+  var nations = Object.keys(object).filter(function(d){return d != "question" && d != "answer" && d != "Total"});
 
-  var data = [["Cyprus", object["Cyprus"]], ["New Zealand", object["New Zealand"]], ["Singapore", object["Singapore"]], ["Sweden", object["Sweden"]]];
+  var data = [];
+  nations.forEach(function(d){
+    data.push([d, object[d]]);
+  });
+
+  console.log(data);
 
   var W = 500, H = 200;
 
