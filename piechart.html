@@ -131,7 +131,7 @@ function detailedData(obj){
     data.push([d, object[d]]);
   });
 
-  console.log(data);
+  console.log(obj.data.answer);
 
   var W = 500, H = 200;
 
@@ -139,15 +139,22 @@ function detailedData(obj){
                     .domain([0,50])
                     .range([0,H]);
 
+  var thing = d3.select("body").append("g")
+                .attr("class", "barchart");
 
-  var canvas = d3.select("body")
-                .append("svg")
-                .attr("class", "barchart")
+  var title = thing
+              .append("h1")
+              .attr("height", 130)
+              .attr("dy", 20)
+              .text(obj.data.answer);
+
+  var canvas = thing.append("svg")
                 .attr("width", W)
                 .attr("height", H)
-                .style("stroke-width", 3)
+                .style("stroke-width", 1)
                 .style("stroke", "black");
 
+  
   var bars = canvas.selectAll("rect")
               .data(data)
               .enter()
