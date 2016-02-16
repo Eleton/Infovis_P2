@@ -53,12 +53,11 @@ d3.csv(filename, type, function(error, data) {
   for (var key in data[0]) {
     subjects.push(key);
   }
-  //subjects = ["question", "total", "Cyprus", "New Zealand", "Singapore", "Sweden"]
 
 
-  var title = d3.select("body").append("h1").text(subjects[subjects.length-1]);
+  var title = d3.select("body").append("h1").text(data[0].question);
 
-  for(var i = 2; i < subjects.length - 1; i++){
+  for(var i = 3; i < subjects.length; i++){
 
 
   country = subjects[i];
@@ -79,7 +78,7 @@ d3.csv(filename, type, function(error, data) {
 
   g.append("path")
       .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.question); });
+      .style("fill", function(d) { return color(d.data.answer); });
 
   
   g.append("text")
@@ -102,7 +101,7 @@ d3.csv(filename, type, function(error, data) {
   var legend = d3.select("body").append("g");
 
   data.forEach(function(d, i){
-    legend.append("div").style("color", colors[i]).text(d.question);
+    legend.append("div").style("color", colors[i]).text(d.answer);
 
   })
 
@@ -150,7 +149,7 @@ function detailedData(obj){
                   .append("rect")
                   .attr("height", function(d){return widthScale(d[1])}) 
                   .attr("width", 50)
-                  .attr("fill", color(obj.data.question))
+                  .attr("fill", color(obj.data.answer))
                   .attr("x", function(d, i){return i * 60;})
                   .attr("y", function(d){return H - widthScale(d[1])});
 

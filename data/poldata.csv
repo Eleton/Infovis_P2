@@ -1,5 +1,5 @@
-question,Total,Cyprus,New Zealand,Singapore,Sweden,Important in life: Politics
-Very important,13,13.3,7.3,12.8,17.3
-Rather important,38.4,24.2,39.7,41,45.3
-Not very important,32.5,32,37.3,33.5,27.8
-Not at all important,14.8,29.4,10.9,12.8,8.9
+question,answer,Total,Cyprus,New Zealand,Singapore,Sweden
+Important in life: Politics,Very important,13,13.3,7.3,12.8,17.3
+Important in life: Politics,Rather important,38.4,24.2,39.7,41,45.3
+Important in life: Politics,Not very important,32.5,32,37.3,33.5,27.8
+Important in life: Politics,Not at all important,14.8,29.4,10.9,12.8,8.9
