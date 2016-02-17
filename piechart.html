@@ -20,7 +20,7 @@ var subjects = [];
 
 var country;
 
-var colors = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"].reverse();
+var colors = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#5b486b", "#4b486b"].reverse();
 
 var width = 250,
     height = 250,
@@ -54,15 +54,19 @@ d3.csv(filename, type, function(error, data) {
     subjects.push(key);
   }
 
+  var section = d3.select("body").append("g")
+                  .attr("class", data[0].question.split(" ").join("").split(":").join(""))
 
-  var title = d3.select("body").append("h1").text(data[0].question);
+  var title = section.append("h1").text(data[0].question);
 
   for(var i = 3; i < subjects.length; i++){
 
 
   country = subjects[i];
 
-  var svg = d3.select("body").append("svg")
+  
+
+  var svg = section.append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
@@ -87,6 +91,13 @@ d3.csv(filename, type, function(error, data) {
       .text(function(d) { return d.data[country] + "%"; });
 
   g.on("click", function(mouseEvent){detailedData(mouseEvent)});
+  g.on("mouseover", function(mouseEvent){
+    d3.select(this).select("path").style("stroke", "black").style("stroke-width", 3);
+  })
+  g.on("mouseout", function(mouseEvent){
+    d3.select(this).select("path").style("stroke", "white").style("stroke-width", 1);
+  })
+  
   
 
   svg.append("text")
@@ -98,7 +109,7 @@ d3.csv(filename, type, function(error, data) {
 
   }
 
-  var legend = d3.select("body").append("g");
+  var legend = section.append("g");
 
   data.forEach(function(d, i){
     legend.append("div").style("color", colors[i]).text(d.answer);
@@ -138,11 +149,15 @@ function detailedData(mouseEvent){
                     .domain([0,50])
                     .range([0,H]);
 
-  var barchart = d3.select("body").append("g")
+                    console.log(eventData.question.split(" ").join("").split(":").join(""));
+
+  var barchart = d3.select("." + eventData.question.split(" ").join("").split(":").join("")).append("g")
                 .attr("class", "barchart");
 
+                console.log(barchart);
+
   var title = barchart
-              .append("h1")
+              .append("h2")
               .attr("height", 130)
               .attr("dy", 20)
               .text(mouseEvent.data.answer);
@@ -184,7 +199,7 @@ function detailedData(mouseEvent){
 
 createGraphs("data/poldata.csv");
 //createGraphs("data/sexdata.csv");
-//createGraphs("data/obeydata.csv");
+createGraphs("data/obeydata.csv");
 //createGraphs("data/prouddata.csv");
 
 </script>
